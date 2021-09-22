@@ -1,0 +1,71 @@
+# valores únicos do “nivel” de cada “ano_ingresso”
+
+db.alunos.aggregate([
+    {$group:{
+        _id:"$ano_ingresso",
+        niveis: {$addToSet: "$nivel"}
+    }},
+    {$sort: {_id: 1}}
+])
+
+# quantidade de alunos matriculados por cada “id_curso”
+
+db.alunos.aggregate([
+    {$group: {
+        _id: "$id_curso",
+        qtd_alunos: {$sum: 1}
+    }},
+    {$sort: {_id:1}}
+])
+
+# quantidade de alunos matriculados por “ano_ingresso” no "id_curso“: 1222
+
+db.alunos.aggregate([
+    {$match: {id_curso: 1222}},
+    {$group:{
+        _id: "$ano_ingresso",
+        qtd_alunos: {$sum: 1}
+    }},
+    {$sort: {_id:1}}
+])
+
+# todos os documentos do “nível”: “M”
+
+db.alunos.find({nivel: "M"}).limit(5)
+
+db.alunos.aggregate([
+    {$match: {nivel: "M"}},
+    {$limit: 5}
+])
+
+# o último ano que teve cada curso (id_curso) dos níveis “M”
+
+db.alunos.aggregate([
+    {$match: {nivel:"M"}},
+    {$sort:{ano_ingresso:1}},
+    {$group: {
+        _id: "$id_curso",
+        ultimo_ano: {$last: "$ano_ingresso"}
+    }},
+    {$sort:{_id:1}}
+])
+
+db.alunos.aggregate([
+    {$match: {nivel:"M"}},
+    {$group: {
+        _id: "$id_curso",
+        ultimo_ano: {$max: "$ano_ingresso"}
+    }},
+    {$sort:{_id:1}}
+])
+
+# último ano que teve cada curso (id_curso) dos níveis “M”, ordenados pelos anos mais novos de cada curso
+
+db.alunos.aggregate([
+    {$match: {nivel:"M"}},
+    {$group: {
+        _id: "$id_curso",
+        ultimo_ano: {$max: "$ano_ingresso"}
+    }},
+    {$sort:{ultimo_ano:-1}}
+])

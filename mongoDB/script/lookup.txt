@@ -1,0 +1,31 @@
+# left outer join da collection alunos e cursos, quando o id_curso dos 2 forem o mesmo
+
+db.alunos.aggregate([
+    {$lookup:{
+        from: "cursos",
+        localField: "id_curso",
+        foreignField: "id_curso",
+        as: "cursoDetails"
+    }}
+])
+
+# e visualizar apenas os seguintes campos
+# Alunos: id_discente, nivel
+# Cursos: id_curso, id_unidade, nome
+
+db.alunos.aggregate([
+    {$lookup:{
+        from: "cursos",
+        localField: "id_curso",
+        foreignField: "id_curso",
+        as: "cursoDetails"
+    }},
+    {$project:{
+        _id: 0,
+        id_discente: 1,
+        nivel: 1,
+        "cursoDetails.id_curso": 1,
+        "cursoDetails.id_unidade": 1,
+        "cursoDetails.nome": 1
+    }}
+])
