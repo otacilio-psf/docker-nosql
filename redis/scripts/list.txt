@@ -1,0 +1,19 @@
+lpush lista pedro
+lpush lista otacilio
+rpush lista filho
+
+lrange lista 0 -1
+lrange lista 1 -1
+
+llen lista
+
+lpop lista
+rpop lista
+llen lista
+
+lrange lista 0 -1
+
+brpop lista 5
+
+ltrim <chave> <novoInicio> <novoFim>
+

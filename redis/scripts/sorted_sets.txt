@@ -1,0 +1,17 @@
+del pesquisa:produto
+
+zadd pesquisa:produto 100 monitor 20 HD 10 mouse 50 teclado
+
+zcard pesquisa:produto
+
+zrevrange pesquisa:produto 0 -1
+
+zscore pesquisa:produto teclado
+
+zrem pesquisa:produto HD
+
+zpopmax pesquisa:produto
+
+zpopmin pesquisa:produto
+
+zrange pesquisa:produto 0 -1

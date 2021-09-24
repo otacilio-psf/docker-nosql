@@ -1,0 +1,23 @@
+del pesquisa:produto
+
+sadd pesquisa:produto monitor mouse teclado
+
+scard pesquisa:produto
+
+smembers pesquisa:produto
+
+sismember pesquisa:produto monitor
+
+srem pesquisa:produto monitor
+
+spop pesquisa:produto
+
+sadd pesquisa:desconto "memoria RAM" monitor teclado HD
+
+sinter pesquisa:produto pesquisa:desconto
+
+sdiff pesquisa:produto pesquisa:desconto
+
+sunionstore pesquisa:produto_desconto pesquisa:produto pesquisa:desconto
+
+smembers pesquisa:produto_desconto

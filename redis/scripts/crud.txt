@@ -1,0 +1,24 @@
+set usuario:nome Otacilio
+
+set usuario:sobrenome Filho
+
+get usuario:nome
+
+strlen usuario:nome
+
+set views:qtd 100
+
+incrby views:qtd 10
+
+del usuario:sobrenome
+
+exists usuario:sobrenome
+exists usuario:nome
+
+expire views:qtd 5
+ttl views:qtd
+
+expire usuario:nome 30
+ttl usuario:nome
+persist usuario:nome
+ttl usuario:nome

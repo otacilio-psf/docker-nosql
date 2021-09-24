@@ -1,0 +1,21 @@
+del usuario:100
+
+hmset usuario:100 nome Augusto estado SP views 10
+
+hgetall usuario:100
+
+hlen usuario:100
+
+hmget usuario:100 nome views
+
+hstrlen usuario:100 nome
+
+hincrby usuario:100 views 2
+
+hkeys usuario:100
+
+hvals usuario:100
+
+hdel usuario:100 estado
+
+hgetall usuario:100
